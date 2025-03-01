@@ -6,7 +6,6 @@ import Footer from "./components/Footer.jsx";
 import ProfilePage from "./ProfilePage.jsx";
 import { UserProvider } from "./UserContext.jsx"; 
 
-
 function App() {
   return (
     <UserProvider>  
