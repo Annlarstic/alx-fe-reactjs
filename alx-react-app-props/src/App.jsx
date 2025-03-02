@@ -1,5 +1,5 @@
 import React from "react";
-import { UserProvider } from "./UserContext";  // Import UserProvider
+import { UserContext, UserProvider } from "./UserContext"; 
 import Header from "./components/Header";
 import WelcomeMessage from "./components/WelcomeMessage";
 import MainContent from "./components/MainContent";
@@ -15,6 +15,7 @@ function App() {
         <MainContent />
         <ProfilePage />  
         <Footer />
+        <UserContext/>
       </div>
     </UserProvider>
   );
