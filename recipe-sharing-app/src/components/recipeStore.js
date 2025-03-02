@@ -1,23 +1,24 @@
-import { useParams } from "react-router-dom";
-import useRecipeStore from "./recipeStore";
+import create from 'zustand';
 
-const RecipeDetails = () => {
-  const { id } = useParams(); 
-  const recipe = useRecipeStore((state) =>
-    state.recipes.find((recipe) => recipe.id === Number(id))
-  );
+const useRecipeStore = create((set) => ({
+  recipes: [],
 
-  if (!recipe) {
-    return <h2>Recipe not found</h2>;
-  }
+  addRecipe: (newRecipe) =>
+    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
 
-  return (
-    <div>
-      <h1>{recipe.title}</h1>
-      <p>{recipe.description}</p>
-      <p><strong>Recipe ID:</strong> {recipe.id}</p> {/* Ensures recipe.id is present */}
-    </div>
-  );
-};
+  updateRecipe: (updatedRecipe) =>
+    set((state) => ({
+      recipes: state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      ),
+    })),
 
-export default RecipeDetails;
+  deleteRecipe: (recipeId) =>
+    set((state) => ({
+      recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
+    })),
+
+  setRecipes: (recipes) => set({ recipes }),
+}));
+
+export default useRecipeStore;
