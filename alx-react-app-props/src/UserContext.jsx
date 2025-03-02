@@ -1,15 +1,15 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
-const UserContext = createContext();
+// Create UserContext
+export const UserContext = createContext();
 
+// Create a provider component
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ name: "Jane Doe", email: "jane.doe@example.com" });
+  const [user, setUser] = useState({ name: "Ann", role: "Frontend Engineer" });
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      {children}
+      {children}  {/* This allows all children components to access the context */}
     </UserContext.Provider>
   );
 };
-
-export default UserContext;
