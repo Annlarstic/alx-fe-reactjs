@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from "zustand";
 
 const useRecipeStore = create((set) => ({
   recipes: [],
@@ -17,8 +17,6 @@ const useRecipeStore = create((set) => ({
     set((state) => ({
       recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
     })),
-
-  setRecipes: (recipes) => set({ recipes }),
 }));
 
 export default useRecipeStore;
