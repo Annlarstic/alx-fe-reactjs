@@ -1,41 +1,27 @@
-import { create } from "zustand";
+import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import useRecipeStore from "./recipeStore"; // Import Zustand store
 
-const useRecipeStore = create((set) => ({
-  recipes: [],
-  searchTerm: "", // New: For filtering
-  filteredRecipes: [],
+const RecipeList = () => {
+  const recipes = useRecipeStore((state) => state.recipes); // Access recipes from Zustand store
 
-  // Add a new recipe
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  return (
+    <div>
+      <h2>Recipe List</h2>
+      {recipes.length === 0 ? (
+        <p>No recipes added yet.</p>
+      ) : (
+        recipes.map((recipe) => (
+          <div key={recipe.id}>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+            {/* Add a Link to navigate to recipe details */}
+            <Link to={`/recipe/${recipe.id}`}>View Details</Link>
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
 
-  // Update an existing recipe
-  updateRecipe: (updatedRecipe) =>
-    set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
-      ),
-    })),
-
-  // Delete a recipe by ID
-  deleteRecipe: (recipeId) =>
-    set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
-    })),
-
-  // Set a list of recipes (initialization)
-  setRecipes: (recipes) => set({ recipes }),
-
-  // Set the search term
-  setSearchTerm: (term) => set({ searchTerm: term }),
-
-  // Filter recipes based on the search term
-  filterRecipes: () =>
-    set((state) => ({
-      filteredRecipes: state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      ),
-    })),
-}));
-
-export default useRecipeStore;
+export default RecipeList;

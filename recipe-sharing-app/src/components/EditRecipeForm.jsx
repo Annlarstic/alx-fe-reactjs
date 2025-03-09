@@ -1,22 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import useRecipeStore from "./recipeStore";
 
-const SearchBar = () => {
-  const setSearchTerm = useRecipeStore((state) => state.setSearchTerm);
-  const filterRecipes = useRecipeStore((state) => state.filterRecipes);
+const EditRecipeForm = ({ recipe }) => {
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+  const [title, setTitle] = useState(recipe?.title || "");
+  const [description, setDescription] = useState(recipe?.description || "");
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    filterRecipes();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateRecipe({ ...recipe, title, description });
   };
 
   return (
-    <input
-      type="text"
-      placeholder="Search recipes..."
-      onChange={handleSearch}
-    />
+    <form onSubmit={handleSubmit}>
+      <label>
+        Title:
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+          required
+        />
+      </label>
+      <label>
+        Description:
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+        />
+      </label>
+      <button type="submit">Update Recipe</button>
+    </form>
   );
 };
 
-export default SearchBar;
+export default EditRecipeForm;
+
