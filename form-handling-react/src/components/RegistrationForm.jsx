@@ -1,46 +1,61 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from "react";
 
-const RegistrationFormikForm = () => {
-  const initialValues = {
-    username: '',
-    email: '',
-    password: '',
-  };
-
-  const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    email: Yup.string().email("Invalid email format").required("Email is required"),
-    password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+const RegistrationForm = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
   });
 
-  const onSubmit = (values) => {
-    console.log("Formik Form Data:", values);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.username || !formData.email || !formData.password) {
+      alert("All fields are required!");
+      return;
+    }
+    console.log("Form submitted:", formData);
   };
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <Form>
-        <label>Username:</label>
-        <Field type="text" name="username" />
-        <ErrorMessage name="username" component="div" />
-        <br />
-        
-        <label>Email:</label>
-        <Field type="email" name="email" />
-        <ErrorMessage name="email" component="div" />
-        <br />
-        
-        <label>Password:</label>
-        <Field type="password" name="password" />
-        <ErrorMessage name="password" component="div" />
-        <br />
-        
-        <button type="submit">Register</button>
-      </Form>
-    </Formik>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Username:
+        <input
+          type="text"
+          name="username"
+          value={formData.username} // This links the state
+          onChange={handleChange}   // This updates the state
+        />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <button type="submit">Register</button>
+    </form>
   );
 };
 
-export default RegistrationFormikForm;
+export default RegistrationForm;
