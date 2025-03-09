@@ -6,8 +6,8 @@ const SearchBar = () => {
   const filterRecipes = useRecipeStore((state) => state.filterRecipes);
 
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    filterRecipes();
+    setSearchTerm(e.target.value); 
+    filterRecipes(); 
   };
 
   return (
@@ -15,6 +15,7 @@ const SearchBar = () => {
       type="text"
       placeholder="Search recipes..."
       onChange={handleSearch}
+      style={{ marginBottom: "16px", padding: "8px", width: "100%" }}
     />
   );
 };

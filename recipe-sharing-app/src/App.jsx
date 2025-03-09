@@ -5,12 +5,12 @@ import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from "./components/RecipeDetails";
 import SearchBar from "./components/SearchBar";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
         <h1>Recipe Sharing App</h1>
-        <SearchBar />
+        <SearchBar /> 
         <AddRecipeForm />
         <Routes>
           <Route path="/" element={<RecipeList />} />
@@ -19,6 +19,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
