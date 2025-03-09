@@ -1,6 +1,6 @@
 import React from "react";
 import RegistrationForm from "./components/RegistrationForm.jsx";
-import FormikForm from "./components/FormikForm.js";
+import FormikForm from "./components/FormikForm.js"; 
 
 const App = () => {
   return (
@@ -8,7 +8,7 @@ const App = () => {
       <h1>User Registration</h1>
       <RegistrationForm />
       <h2>Formik Form</h2>
-      <formikForm />
+      <FormikForm /> {/* Corrected the capitalization */}
     </div>
   );
 };
