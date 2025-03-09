@@ -8,7 +8,7 @@ const App = () => {
       <h1>User Registration</h1>
       <RegistrationForm />
       <h2>Formik Form</h2>
-      <FormikForm />
+      <formikForm />
     </div>
   );
 };
