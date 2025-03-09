@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import useRecipeStore from "./recipeStore";
 
 const RecipeDetails = () => {
-  const { id: recipeId } = useParams(); // Get the recipe ID from the URL
+  const { id: recipeId } = useParams(); 
   const recipe = useRecipeStore((state) =>
     state.recipes.find((recipe) => recipe.id === recipeId)
   );
 
   if (!recipe) {
-    return <p>Recipe not found!</p>; // Handle missing recipe gracefully
+    return <p>Recipe not found!</p>; 
   }
 
   return (
