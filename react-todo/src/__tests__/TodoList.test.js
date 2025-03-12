@@ -13,11 +13,13 @@ describe("TodoList Component", () => {
     render(<TodoList />);
     const todoItem = screen.getByText("Learn React");
 
-    // Click to toggle completion
+   
+    
     fireEvent.click(todoItem);
     expect(todoItem).toHaveStyle("text-decoration: line-through");
 
-    // Click again to undo completion
+ 
+
     fireEvent.click(todoItem);
     expect(todoItem).toHaveStyle("text-decoration: none");
   });
@@ -26,7 +28,8 @@ describe("TodoList Component", () => {
     render(<TodoList />);
     const deleteButton = screen.getAllByText("Delete")[0];
 
-    // Click delete button
+
+
     fireEvent.click(deleteButton);
     expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
   });
